@@ -1,5 +1,4 @@
 import pytest
-
 import unit2
 
 
@@ -20,6 +19,7 @@ def report():
     print("The Testing process is over")
 import atexit
 atexit.register(report)
+
 
 def test_unit2problems():
     assert unit2.get_credit_card_balance(42, 0.2, 0.04) == 31.38
