@@ -1,8 +1,3 @@
-import sys
-
-sys.setrecursionlimit(10000)
-
-
 def get_monthly_payment(balance, interest_rate, months=12):
     """
     Args:
