@@ -1,5 +1,6 @@
 import time
 
+
 # def get_credit_card_balance(balance: int, interest_rate: float, payment_rate: float, months=12) -> float:
 #     """
 #     Args:
@@ -19,9 +20,7 @@ import time
 #
 
 
-
-
-def get_credit_card_balance_rec(balance: int, interest_rate: float, payment_rate: float, months: int = 12) -> float:
+def get_credit_card_balance(balance: int, interest_rate: float, payment_rate: float, months: int = 12) -> float:
     """
 
     Args:
@@ -33,15 +32,14 @@ def get_credit_card_balance_rec(balance: int, interest_rate: float, payment_rate
     Returns:
         Remaining balance at the end of the year:
     """
+    balance -= balance * payment_rate
+    balance += balance * (interest_rate / 12)
     if months == 1:
-        anpaid_balance = (balance - balance * payment_rate)
-        balance = anpaid_balance + anpaid_balance * interest_rate / 12.0
+        return round(balance, 2)
     else:
-        balance = get_credit_card_balance_rec(balance, interest_rate,  payment_rate, months-1)
-
-    return round(balance, 2)
+        return get_credit_card_balance(balance, interest_rate, payment_rate, months - 1)
 
 
 start = time.time()
-print(get_credit_card_balance_rec(42, 0.2, 0.04))
+print(get_credit_card_balance(42, 0.2, 0.04))
 print(time.time() - start)
