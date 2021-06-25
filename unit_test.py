@@ -14,3 +14,13 @@ def test_get_credit_card_balance(balance, interest_rate, payment_rate, months, r
                          [(3329, 0.2, 12, 310), (4773, 0.2, 12, 440), (3926, 0.2, 12, 360)])
 def test_get_monthly_payment(balance, interest_rate, months, result):
     assert unit2.get_monthly_payment(balance, interest_rate, months) == result
+
+
+def report():
+    print("The Testing process is over")
+import atexit
+atexit.register(report)
+
+def test_unit2problems():
+    assert unit2.get_credit_card_balance(42, 0.2, 0.04) == 31.38
+    assert unit2.get_monthly_payment(3329, 0.2) == 310

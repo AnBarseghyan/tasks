@@ -11,7 +11,10 @@ def get_Guessed_Word(secretWord, lettersGuessed):
     """
     guess_letters = " ".join([x if x in lettersGuessed else "_" for x in secretWord])
     return guess_letters
-print(get_Guessed_Word('apple', ['a', 'c', 'p',  'y', 'z']))
+
+
+print(get_Guessed_Word('apple', ['a', 'c', 'p', 'y', 'z']))
+
 
 def is_Word_Guessed(secretWord, lettersGuessed):
     """
@@ -24,9 +27,24 @@ def is_Word_Guessed(secretWord, lettersGuessed):
         True if all the letters of secretWord are in lettersGuessed; False otherwise
 
     """
-    guessed_letter_count = sum([1 for i in secretWord if i in lettersGuessed])
 
-    return guessed_letter_count == len(secretWord)
+    return set(secretWord) - set(lettersGuessed) == set()
 
-import time
-start = time.time()
+
+class students_info:
+    def __init__(self, data):
+        self.data = data
+
+    def get_grade(self, name):
+        for i in self.data.keys():
+            if i == name:
+                return self.data[i]
+
+    def best(self):
+        best = 0
+        for i in self.data.keys():
+            if self.data[i] > best:
+                best = self.data[i]
+                name = i
+        return name
+
