@@ -8,12 +8,16 @@ def get_monthly_payment(balance: int, interest_rate: float, months=12) -> int:
         the lowest monthly payment that will pay off all debt in under 1 year,:
     """
     month_payment,  remaining_balance, count = 10, 0, 0
-    while remaining_balance >= 0:
+    while True:
         remaining_balance = balance
         count += 1
         for i in range(months):
             anpaid_balance = (remaining_balance - count * month_payment)
             remaining_balance = anpaid_balance + anpaid_balance * interest_rate / 12.0
+
+        if remaining_balance <  0:
+            break
     return count * month_payment
+
 
 print(get_monthly_payment(3926, 0.2))

@@ -1,39 +1,46 @@
-#problem:The program works as follows:
-# you (the user) thinks of an integer between 0 (inclusive) and 100 (not inclusive).
-# The computer makes guesses, and you give it input - is its guess too high or too low?
-# Using bisection search, the computer will guess the user's secret number!
-# number=int(input('enter your number between 0 and 100'))
-# high=100
-# low=0
-# while True:
-#     ans=(high+low)/2
-#     answer=input('Is your secret number '+str(round(ans,0))+'?')
-#     if answer=='h':
-#         high=ans
-#     elif answer=='l':
-#         low=ans
-#     elif answer=='c':
-#         print('Your secret number was: ' + str(int(ans)))
-#         break
-#     else:
-#         print('Sorry, I did not understand your input. Is your secret number '+str(ans)+'?')
+import sys
 
-# import math
-def gcdIter ( a, b ):
-    '''
-    a, b: positive integers
+sys.setrecursionlimit(10000)
 
-    returns: a positive integer, the greatest common divisor of a & b.
-    '''
-    high = max(b,a)
-    low = min(b,a)
-    residual = high % low
-    divisor = int(high / low)
-    if residual == 0:
-        output = low
-    else:
-        output = gcdIter(residual, low)
-    return output
 
-print(gcdIter(1071,462))
+def get_monthly_payment(balance, interest_rate, months=12):
+    """
+    Args:
+        balance: the outstanding balance on the credit card
+        interest_rate: annual interest rate as a decimal
+        months: the period for which calculation is done
+    Returns:
+        the lowest monthly payment that will pay off all debt in under 1 year,:
+    """
+    month_payment, remaining_balance, count = 10, 0, 0
+    while True:
+        remaining_balance = balance
+        count += 1
+        for i in range(months):
+            anpaid_balance = (remaining_balance - count * month_payment)
+            remaining_balance = anpaid_balance + anpaid_balance * interest_rate / 12.0
+
+        if remaining_balance < 0:
+            break
+    return count * month_payment
+
+
+def get_credit_card_balance(balance, interest_rate, payment_rate, months=12):
+    """
+    Args:
+        balance: the outstanding balance on the credit card
+        interest_rate: annual interest rate as a decimal
+        payment_rate: minimum monthly payment rate as a decimal
+        months: the months after that credit card balance is calculated
+
+    Returns:
+        Remaining balance at the end of the months:
+    """
+
+    for n in range(months):
+        anpaid_balance = (balance - balance * payment_rate)
+        balance = anpaid_balance + anpaid_balance * interest_rate / 12.0
+    return round(balance, 2)
+
+
 
